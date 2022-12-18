@@ -15,7 +15,6 @@ public class ParqueDaCidade {
         Visitor geovani = new Visitor("Geovani", "geosilvasousa@gmail.com", "123456"); 
         Admin admin = new Admin("Admin", "parquedacidade@admin.com", "parquedacidade");
         
-        
         geovani.mostrarDados();
         admin.mostrarDados();
     }

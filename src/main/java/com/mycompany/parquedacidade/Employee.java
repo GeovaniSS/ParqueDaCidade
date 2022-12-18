@@ -32,5 +32,4 @@ public class Employee extends User{
     
     private void aceptRequest() {}
     private void declineRequest() {}
-
 }

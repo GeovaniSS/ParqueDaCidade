@@ -46,7 +46,6 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(42, 78, 93));
         jLabel1.setText("Bem-vindo!");
 
-        jLabel5.setIcon(new javax.swing.ImageIcon("/home/gel/Downloads/Parque-da-Cidade-1.jpg")); // NOI18N
         jLabel5.setText("jLabel5");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -63,6 +62,11 @@ public class Login extends javax.swing.JFrame {
         );
 
         emailField.setSelectionColor(new java.awt.Color(12, 138, 102));
+        emailField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailFieldActionPerformed(evt);
+            }
+        });
 
         ButtonRegister.setBackground(new java.awt.Color(64, 134, 163));
         ButtonRegister.setForeground(new java.awt.Color(255, 255, 255));
@@ -100,7 +104,6 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("/home/gel/Downloads/Logo Parque da Cidade.png")); // NOI18N
         jLabel4.setText("jLabel4");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -174,18 +177,29 @@ public class Login extends javax.swing.JFrame {
            this.dispose();
     }//GEN-LAST:event_ButtonRegisterActionPerformed
 
+    public String getEmail() {
+        return this.emailField.getText();
+    }
+    
+    public String getPassword(){
+        return String.valueOf(this.passwordField.getPassword());
+    }
+    
     private void ButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonLoginActionPerformed
-            System.out.println(
-                "Email: " + this.emailField.getText() + 
-                "\nSenha: " + this.passwordField.getText()
-            );
-            new Login().setVisible(false);
-            this.dispose();
+        CheckLogin validateData = new CheckLogin();
+        validateData.validateData(this.getEmail(), this.getPassword());
+        
+        new Login().setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_ButtonLoginActionPerformed
 
     private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_passwordFieldActionPerformed
+
+    private void emailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -216,6 +230,7 @@ public class Login extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Login().setVisible(true);
             }
@@ -235,4 +250,5 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField passwordField;
     // End of variables declaration//GEN-END:variables
+
 }
