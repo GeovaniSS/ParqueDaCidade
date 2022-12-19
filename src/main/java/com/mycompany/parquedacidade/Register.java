@@ -187,18 +187,32 @@ public class Register extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public String getNameRegisterForm() {
+        return this.nameField.getText();
+    }
+    
+    public String getEmail() {
+        return this.emailField.getText();
+    }
+    
+    public String getPassword(){
+        return String.valueOf(this.passwordField.getPassword());
+    }
+    
+    
     private void ButtonBackToLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonBackToLoginActionPerformed
         new Login().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_ButtonBackToLoginActionPerformed
 
     private void ButtonCreateAccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCreateAccActionPerformed
-        Visitor visitorAccount = new Visitor(this.nameField.getText(),  this.emailField.getText(), this.passwordField.getText());
-        System.out.println(
-            "Nome: " + visitorAccount.getName() +
-            "\nEmail: " + visitorAccount.getEmail() + 
-            "\nSenha: " + visitorAccount.getPassword()
+        CheckRegister validateData = new CheckRegister();
+        validateData.validateDataRegister(
+                this.getNameRegisterForm(),
+                this.getEmail(),
+                this.getPassword()
         );
+        
         new Login().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_ButtonCreateAccActionPerformed
@@ -237,6 +251,7 @@ public class Register extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Register().setVisible(true);
             }
