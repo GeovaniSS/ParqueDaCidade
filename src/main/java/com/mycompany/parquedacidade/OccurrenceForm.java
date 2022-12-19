@@ -19,7 +19,7 @@ public class OccurrenceForm extends javax.swing.JFrame {
         initComponents();
     }
     
-    public String getTitle() {
+    public String getTitleOfOcurrence() {
         return this.occurrenceTitleField.getText();
     }
     
@@ -32,8 +32,7 @@ public class OccurrenceForm extends javax.swing.JFrame {
     }
     
     public Date getDate() {
-        Date date = new Date(this.occurrenceDateField.getText());
-        return date;
+        return new Date(this.occurrenceDateField.getText());
     }
     
     public void clearFormFields() {
@@ -236,9 +235,17 @@ public class OccurrenceForm extends javax.swing.JFrame {
     }//GEN-LAST:event_occurrenceLocalizationFieldActionPerformed
 
     private void ButtonRegisterOccurrenceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonRegisterOccurrenceActionPerformed
-       Occurrence oc1 = new Occurrence(getTitle(), getDescription(), getLocalization(), getDate());
+       Occurrence oc1 = new Occurrence(
+               getTitleOfOcurrence(),
+               getDescription(),
+               getLocalization(),
+               getDate()
+       );
+       
        oc1.mostrarDados();
+       
        clearFormFields();
+       
        new Home().setVisible(true);
        this.dispose();
     }//GEN-LAST:event_ButtonRegisterOccurrenceActionPerformed
@@ -274,6 +281,7 @@ public class OccurrenceForm extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new OccurrenceForm().setVisible(true);
             }
