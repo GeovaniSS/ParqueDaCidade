@@ -187,7 +187,7 @@ public class Login extends javax.swing.JFrame {
     
     private void ButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonLoginActionPerformed
         CheckLogin validateData = new CheckLogin();
-        validateData.validateData(this.getEmail(), this.getPassword());
+        validateData.validateDataLogin(this.getEmail(), this.getPassword());
         
         new Home().setVisible(true);
         this.dispose();
