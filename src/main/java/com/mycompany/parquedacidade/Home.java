@@ -32,15 +32,11 @@ public class Home extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         ActiveOcc = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         InactiveOcc = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
         linkOcurrenceRegisterFrame = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -80,80 +76,72 @@ public class Home extends javax.swing.JFrame {
 
         ActiveOcc.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setText("1. Primeira [ATIVA]");
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"Denúncia 1", "descrição...", "Parque da cidade", "19/12/2022", "Ativa"}
+            },
+            new String [] {
+                "Título", "Descrição", "Localização", "Data", "Status"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
 
-        jLabel2.setText("4. Quarta [ATIVA]");
-
-        jLabel3.setText("2. Segunda [ATIVA]");
-
-        jLabel5.setText("3. Terceira [ATIVA]");
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout ActiveOccLayout = new javax.swing.GroupLayout(ActiveOcc);
         ActiveOcc.setLayout(ActiveOccLayout);
         ActiveOccLayout.setHorizontalGroup(
             ActiveOccLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ActiveOccLayout.createSequentialGroup()
-                .addContainerGap(370, Short.MAX_VALUE)
-                .addGroup(ActiveOccLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel1)
-                    .addGroup(ActiveOccLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel2)
-                        .addComponent(jLabel5)))
-                .addGap(357, 357, 357))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 852, Short.MAX_VALUE)
         );
         ActiveOccLayout.setVerticalGroup(
             ActiveOccLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ActiveOccLayout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(jLabel1)
-                .addGap(56, 56, 56)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addGap(58, 58, 58)
-                .addComponent(jLabel2)
-                .addGap(75, 75, 75))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Ativas", ActiveOcc);
 
         InactiveOcc.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel6.setText("1. Primeira [INATIVA]");
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"Denuncia 1", "descricao.....", "Parque da cidade", "20/12/2022", "Inativa"}
+            },
+            new String [] {
+                "Título", "Descrição", "Localização", "Data", "Status"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
 
-        jLabel7.setText("2. Segunda [INATIVA]");
-
-        jLabel8.setText("3 . Terceira [INATIVA]");
-
-        jLabel9.setText("4. Quarta [INATIVA]");
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable2);
 
         javax.swing.GroupLayout InactiveOccLayout = new javax.swing.GroupLayout(InactiveOcc);
         InactiveOcc.setLayout(InactiveOccLayout);
         InactiveOccLayout.setHorizontalGroup(
             InactiveOccLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, InactiveOccLayout.createSequentialGroup()
-                .addContainerGap(358, Short.MAX_VALUE)
-                .addGroup(InactiveOccLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel6)
-                    .addGroup(InactiveOccLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel9)
-                        .addComponent(jLabel8)))
-                .addGap(356, 356, 356))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 852, Short.MAX_VALUE)
         );
         InactiveOccLayout.setVerticalGroup(
             InactiveOccLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(InactiveOccLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(jLabel6)
-                .addGap(56, 56, 56)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
-                .addComponent(jLabel8)
-                .addGap(58, 58, 58)
-                .addComponent(jLabel9)
-                .addGap(92, 92, 92))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, InactiveOccLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(102, 102, 102))
         );
 
         jTabbedPane1.addTab("Inativas", InactiveOcc);
@@ -248,19 +236,15 @@ public class Home extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ActiveOcc;
     private javax.swing.JPanel InactiveOcc;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JButton linkOcurrenceRegisterFrame;
     // End of variables declaration//GEN-END:variables
 }
