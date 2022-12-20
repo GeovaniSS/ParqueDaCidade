@@ -16,6 +16,50 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
     }
+    
+    public String getEmail() {
+        return this.emailField.getText();
+    }
+    
+    public String getPassword(){
+        return String.valueOf(this.passwordField.getPassword());
+    }
+    
+    public boolean validateEmailField() {
+         String email = this.getEmail();
+         
+          if (email.length() < 1) {
+            emailError.setText("Preencha o campo e-mail");
+            return false;
+        }  else {
+            emailError.setText("");
+            return true;
+        }
+    }
+    
+    public boolean validatePasswordField() {
+        String password = this.getPassword();
+        
+        if (password.length() < 1) {
+            passwordError.setText("Preencha o campo senha");
+            return false;
+        } else {
+            passwordError.setText("");
+            return true;
+        }
+    }
+    
+    public boolean validateLogin() {
+        boolean login = true;
+        // Fazer a query no DB
+        
+        if (!login) {
+            loginError.setText("Error: Email ou senha inválido.");
+        }
+        
+        return login;
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,6 +81,9 @@ public class Login extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         passwordField = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
+        emailError = new javax.swing.JLabel();
+        passwordError = new javax.swing.JLabel();
+        loginError = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,9 +109,9 @@ public class Login extends javax.swing.JFrame {
         );
 
         emailField.setSelectionColor(new java.awt.Color(12, 138, 102));
-        emailField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emailFieldActionPerformed(evt);
+        emailField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                emailFieldFocusLost(evt);
             }
         });
 
@@ -91,20 +138,32 @@ public class Login extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(148, 148, 148));
+        jLabel2.setLabelFor(emailField);
         jLabel2.setText("Email");
 
         jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(148, 148, 148));
+        jLabel3.setLabelFor(passwordField);
         jLabel3.setText("Senha");
 
         passwordField.setSelectionColor(new java.awt.Color(12, 138, 102));
-        passwordField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordFieldActionPerformed(evt);
+        passwordField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                passwordFieldFocusLost(evt);
             }
         });
 
         jLabel4.setIcon(new javax.swing.ImageIcon("/home/gel/Downloads/Logo Parque da Cidade.png")); // NOI18N
+
+        emailError.setForeground(new java.awt.Color(255, 51, 17));
+        emailError.setLabelFor(emailField);
+
+        passwordError.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+        passwordError.setForeground(new java.awt.Color(255, 51, 17));
+        passwordError.setLabelFor(passwordField);
+
+        loginError.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
+        loginError.setForeground(new java.awt.Color(255, 51, 17));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -117,21 +176,31 @@ public class Login extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(ButtonRegister, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
-                                .addComponent(ButtonLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(emailField, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addGap(0, 0, Short.MAX_VALUE))
-                                .addComponent(passwordField))
+                            .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(14, 14, 14)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(32, 32, 32))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(105, 105, 105))))
+                        .addGap(105, 105, 105))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addGap(302, 302, 302))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(passwordError)
+                                .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addContainerGap()))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(emailError)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(ButtonRegister, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(ButtonLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(loginError))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,11 +213,17 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(emailError)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(passwordError)
+                .addGap(15, 15, 15)
+                .addComponent(loginError)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ButtonLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(ButtonRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -177,29 +252,22 @@ public class Login extends javax.swing.JFrame {
            this.dispose();
     }//GEN-LAST:event_ButtonRegisterActionPerformed
 
-    public String getEmail() {
-        return this.emailField.getText();
-    }
-    
-    public String getPassword(){
-        return String.valueOf(this.passwordField.getPassword());
-    }
-    
     private void ButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonLoginActionPerformed
-        CheckLogin validateData = new CheckLogin();
-        validateData.validateDataLogin(this.getEmail(), this.getPassword());
+        boolean loginIsValid = validateEmailField() && validatePasswordField() && validateLogin();
         
-        new Home().setVisible(true);
-        this.dispose();
+        if (loginIsValid) {
+            new Home().setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_ButtonLoginActionPerformed
 
-    private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passwordFieldActionPerformed
+    private void emailFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFieldFocusLost
+        validateEmailField();
+    }//GEN-LAST:event_emailFieldFocusLost
 
-    private void emailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_emailFieldActionPerformed
+    private void passwordFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordFieldFocusLost
+        validatePasswordField();
+    }//GEN-LAST:event_passwordFieldFocusLost
 
     /**
      * @param args the command line arguments
@@ -240,6 +308,7 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonLogin;
     private javax.swing.JButton ButtonRegister;
+    private javax.swing.JLabel emailError;
     private javax.swing.JTextField emailField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -248,6 +317,8 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel loginError;
+    private javax.swing.JLabel passwordError;
     private javax.swing.JPasswordField passwordField;
     // End of variables declaration//GEN-END:variables
 
