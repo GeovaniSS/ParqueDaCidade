@@ -9,10 +9,15 @@ package DTO;
  * @author gel
  */
 public abstract class UserDTO {
+    private int id;
     private String name;
     private String email;
     private String password;
 
+    public int getId(){
+        return this.id;
+    }
+    
     public String getName() {
         return this.name;
     }
@@ -36,8 +41,4 @@ public abstract class UserDTO {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    public void register() {}
-    public void login() {}
-    public void logout() {}
 }
