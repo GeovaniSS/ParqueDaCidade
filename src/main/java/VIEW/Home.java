@@ -4,6 +4,12 @@
  */
 package VIEW;
 
+import DAO.OccurrenceDAO;
+import DTO.OccurrenceDTO;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author gel
@@ -15,6 +21,7 @@ public class Home extends javax.swing.JFrame {
      */
     public Home() {
         initComponents();
+        listActiveOccurrencies();
     }
 
     /**
@@ -32,11 +39,11 @@ public class Home extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         ActiveOcc = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        ActiveOccurrencesTable = new javax.swing.JTable();
         InactiveOcc = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        InactiveOccurrencesTable = new javax.swing.JTable();
         linkOcurrenceRegisterFrame = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -73,75 +80,85 @@ public class Home extends javax.swing.JFrame {
         );
 
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane1StateChanged(evt);
+            }
+        });
 
         ActiveOcc.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        ActiveOccurrencesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Denúncia 1", "descrição...", "Parque da cidade", "19/12/2022", "Ativa"}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
                 "Título", "Descrição", "Localização", "Data", "Status"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            boolean[] canEdit = new boolean [] {
+                true, false, true, false, true
             };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane3.setViewportView(ActiveOccurrencesTable);
+        if (ActiveOccurrencesTable.getColumnModel().getColumnCount() > 0) {
+            ActiveOccurrencesTable.getColumnModel().getColumn(0).setResizable(false);
+            ActiveOccurrencesTable.getColumnModel().getColumn(1).setResizable(false);
+            ActiveOccurrencesTable.getColumnModel().getColumn(2).setResizable(false);
+            ActiveOccurrencesTable.getColumnModel().getColumn(3).setResizable(false);
+            ActiveOccurrencesTable.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         javax.swing.GroupLayout ActiveOccLayout = new javax.swing.GroupLayout(ActiveOcc);
         ActiveOcc.setLayout(ActiveOccLayout);
         ActiveOccLayout.setHorizontalGroup(
             ActiveOccLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 852, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 852, Short.MAX_VALUE)
         );
         ActiveOccLayout.setVerticalGroup(
             ActiveOccLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ActiveOccLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Ativas", ActiveOcc);
 
         InactiveOcc.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        InactiveOccurrencesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Denuncia 1", "descricao.....", "Parque da cidade", "20/12/2022", "Inativa"}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
                 "Título", "Descrição", "Localização", "Data", "Status"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(jTable2);
+        ));
+        jScrollPane4.setViewportView(InactiveOccurrencesTable);
 
         javax.swing.GroupLayout InactiveOccLayout = new javax.swing.GroupLayout(InactiveOcc);
         InactiveOcc.setLayout(InactiveOccLayout);
         InactiveOccLayout.setHorizontalGroup(
             InactiveOccLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 852, Short.MAX_VALUE)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 852, Short.MAX_VALUE)
         );
         InactiveOccLayout.setVerticalGroup(
             InactiveOccLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, InactiveOccLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(102, 102, 102))
+            .addGroup(InactiveOccLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Inativas", InactiveOcc);
@@ -198,6 +215,11 @@ public class Home extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_linkOcurrenceRegisterFrameActionPerformed
 
+    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
+        // TODO add your handling code here:
+        listInactiveOccurrencies();
+    }//GEN-LAST:event_jTabbedPane1StateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -235,16 +257,64 @@ public class Home extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ActiveOcc;
+    private javax.swing.JTable ActiveOccurrencesTable;
     private javax.swing.JPanel InactiveOcc;
+    private javax.swing.JTable InactiveOccurrencesTable;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JButton linkOcurrenceRegisterFrame;
     // End of variables declaration//GEN-END:variables
+    private void listActiveOccurrencies() {
+        try {
+            OccurrenceDAO occurrenceDAO = new OccurrenceDAO();
+            
+            DefaultTableModel model = (DefaultTableModel) ActiveOccurrencesTable.getModel();
+            model.setNumRows(0);
+            
+            ArrayList<OccurrenceDTO> occurrences = occurrenceDAO.listActiveOccurrences();
+            
+            for (OccurrenceDTO occurrence : occurrences) {
+                model.addRow(new Object[]{
+                    occurrence.getTitle(),
+                    occurrence.getDescription(),
+                    occurrence.getLocalization(),
+                    occurrence.getDate(), 
+                    occurrence.getStatus()
+                });
+            }
+        
+        } catch(Exception error) {
+            System.out.println("Error: " + error);
+        }
+    }
+    
+        private void listInactiveOccurrencies() {
+        try {
+            OccurrenceDAO occurrenceDAO = new OccurrenceDAO();
+            
+            DefaultTableModel model = (DefaultTableModel) InactiveOccurrencesTable.getModel();
+            model.setNumRows(0);
+            
+            ArrayList<OccurrenceDTO> occurrences = occurrenceDAO.listInactiveOccurrences();
+            
+            for (OccurrenceDTO occurrence : occurrences) {
+                model.addRow(new Object[]{
+                    occurrence.getTitle(),
+                    occurrence.getDescription(),
+                    occurrence.getLocalization(),
+                    occurrence.getDate(), 
+                    occurrence.getStatus()
+                });
+            }
+        
+        } catch(Exception error) {
+            System.out.println("Error: " + error);
+        }
+    }
+
 }

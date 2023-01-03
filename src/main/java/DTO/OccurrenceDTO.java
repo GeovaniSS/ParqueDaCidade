@@ -11,6 +11,7 @@ import java.util.Date;
  * @author gel
  */
 public class OccurrenceDTO {
+    private int id;
     private String title;
     private String description; 
     private String localization;
@@ -23,6 +24,19 @@ public class OccurrenceDTO {
         setLocalization(localization);
         setDate(date);
         setStatus(true);
+    }
+    
+    public OccurrenceDTO(int id, String title, String description, String localization, Date date, boolean status) {
+        setId(id);
+        setTitle(title);
+        setDescription(description);
+        setLocalization(localization);
+        setDate(date);
+        setStatus(status);
+    }
+    
+    public int getId() {
+        return this.id;
     }
     
     public String getTitle() {
@@ -43,6 +57,10 @@ public class OccurrenceDTO {
     
     public boolean getStatus() {
         return this.status;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
     }
     
     public void setTitle(String title) {
