@@ -4,6 +4,8 @@
  */
 package VIEW;
 
+import DAO.UserDAO;
+import DTO.UserDTO;
 import java.util.regex.Pattern;
 
 /**
@@ -291,8 +293,18 @@ public class Register extends javax.swing.JFrame {
 
     private void ButtonCreateAccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCreateAccActionPerformed
         boolean registerIsValid = validateNameField() && validateEmailField() && validatePasswordField();
+
+        String name = this.getNameText();
+        String email = this.getEmail();
+        String password = this.getPassword();
         
         if (registerIsValid) {
+            UserDTO userDTO = new UserDTO(name, email, password);
+            UserDAO userDAO = new UserDAO();
+            userDTO.setLoginStatus(true);
+            
+            userDAO.registerUser(userDTO);
+            
             new Home().setVisible(true);
             this.dispose();
         }

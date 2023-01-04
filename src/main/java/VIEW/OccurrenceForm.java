@@ -203,14 +203,14 @@ public class OccurrenceForm extends javax.swing.JFrame {
     }//GEN-LAST:event_occurrenceLocalizationFieldActionPerformed
 
     private void ButtonRegisterOccurrenceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonRegisterOccurrenceActionPerformed
-        String title = this.occurrenceTitleField.getText();
-        String description = this.occurrenceDescriptionField.getText();
-        String localization = this.occurrenceLocalizationField.getText();
+       String title = this.occurrenceTitleField.getText();
+       String description = this.occurrenceDescriptionField.getText();
+       String localization = this.occurrenceLocalizationField.getText();
         
-        OccurrenceDTO occurrenceDTO = new OccurrenceDTO(title, description, localization, new Date());
-        OccurrenceDAO ocurrenceDAO = new OccurrenceDAO();
+       OccurrenceDTO occurrenceDTO = new OccurrenceDTO(title, description, localization, new Date());
+       OccurrenceDAO ocurrenceDAO = new OccurrenceDAO();
         
-        ocurrenceDAO.registerOccurrence(occurrenceDTO);
+       ocurrenceDAO.registerOccurrence(occurrenceDTO);
 
        new Home().setVisible(true);
        this.dispose();

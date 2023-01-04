@@ -12,3 +12,12 @@ CREATE TABLE Occurrences(
 );
 
 SELECT * FROM Occurrences;
+
+CREATE TABLE Users(
+	id int auto_increment primary key,
+	name varchar(200) not null,
+	email varchar(200) not null,
+	passwd varchar(50) not null,
+);
+
+SELECT * FROM Users;

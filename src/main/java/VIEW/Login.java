@@ -26,9 +26,9 @@ public class Login extends javax.swing.JFrame {
     }
     
     public boolean validateEmailField() {
-         String email = this.getEmail();
+        String email = this.getEmail();
          
-          if (email.length() < 1) {
+        if (email.length() < 1) {
             emailError.setText("Preencha o campo e-mail");
             return false;
         }  else {

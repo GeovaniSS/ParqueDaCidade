@@ -17,11 +17,11 @@ public class UserDAO {
     private Connection con;
     private PreparedStatement pstm;
     
-    public void register(UserDTO userDTO) {
+    public void registerUser(UserDTO userDTO) {
         con = ConnectionDAO.getConnection();
         
          try {
-            String sql = "INSERT INTO Occurrences (title, description, localization, occurrenceDate, status) VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO Users (name, email, passwd) VALUES (?, ?, ?)";
             
             pstm = con.prepareStatement(sql);
             pstm.setString(1, userDTO.getName());
@@ -37,8 +37,5 @@ public class UserDAO {
     }
 
     public void login() {
-    }
-
-    public void logout() {
     }
 }

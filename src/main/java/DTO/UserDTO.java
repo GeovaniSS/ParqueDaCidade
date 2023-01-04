@@ -8,11 +8,18 @@ package DTO;
  *
  * @author gel
  */
-public abstract class UserDTO {
+public class UserDTO {
     private int id;
     private String name;
     private String email;
     private String password;
+    private boolean isLogged;
+    
+    public UserDTO(String name, String email, String password) {
+        this.setName(name);
+        this.setEmail(email);
+        this.setPassword(password);
+    }
 
     public int getId(){
         return this.id;
@@ -29,6 +36,10 @@ public abstract class UserDTO {
     public String getPassword() {
         return this.password;
     }
+    
+    public boolean getLoginStatus() {
+        return this.isLogged;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -40,5 +51,13 @@ public abstract class UserDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    
+    public void setLoginStatus(boolean isLogged) {
+        this.isLogged = isLogged;
+    }
+    
+    public void logout() {
+        this.isLogged = false;
     }
 }
