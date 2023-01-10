@@ -293,20 +293,25 @@ public class Register extends javax.swing.JFrame {
 
     private void ButtonCreateAccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCreateAccActionPerformed
         boolean registerIsValid = validateNameField() && validateEmailField() && validatePasswordField();
+        
+        if (!registerIsValid) return;
 
         String name = this.getNameText();
         String email = this.getEmail();
         String password = this.getPassword();
         
-        if (registerIsValid) {
-            UserDTO userDTO = new UserDTO(name, email, password);
-            UserDAO userDAO = new UserDAO();
-            userDTO.setLoginStatus(true);
-            
-            userDAO.registerUser(userDTO);
-            
+        UserDTO userDTO = new UserDTO(name, email, password);
+        UserDAO userDAO = new UserDAO();
+        if (!userDAO.checkUserExistance(userDTO)) {
+          userDAO.registerUser(userDTO);
+          userDTO.setLoginStatus(true);
+        } else {
+          emailError.setText("Email já cadastrado.");
+        }
+
+        if (userDTO.getLoginStatus() == true) {
             new Home().setVisible(true);
-            this.dispose();
+            this.dispose();  
         }
     }//GEN-LAST:event_ButtonCreateAccActionPerformed
 

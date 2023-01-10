@@ -15,8 +15,15 @@ public class UserDTO {
     private String password;
     private boolean isLogged;
     
+    // cadastro
     public UserDTO(String name, String email, String password) {
         this.setName(name);
+        this.setEmail(email);
+        this.setPassword(password);
+    }
+    
+    // login
+    public UserDTO(String email, String password) {
         this.setEmail(email);
         this.setPassword(password);
     }
@@ -41,6 +48,10 @@ public class UserDTO {
         return this.isLogged;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public void setName(String name) {
         this.name = name;
     }
@@ -55,9 +66,5 @@ public class UserDTO {
     
     public void setLoginStatus(boolean isLogged) {
         this.isLogged = isLogged;
-    }
-    
-    public void logout() {
-        this.isLogged = false;
     }
 }
